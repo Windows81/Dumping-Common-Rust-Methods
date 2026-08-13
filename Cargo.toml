@@ -1,0 +1,15 @@
+[package]
+name = "rust-sig"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ansi_term = "0.12.1"
+hyper-util = "0.1.20"
+itertools = "0.15.0"
+reqwest = "0.12.26"
+url = "2.5.8"
+
+[[bin]]
+name = "rust-sig"
+path = "main.rs"
