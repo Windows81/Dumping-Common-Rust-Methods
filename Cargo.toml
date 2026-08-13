@@ -5,11 +5,16 @@ edition = "2024"
 
 [dependencies]
 ansi_term = "0.12.1"
+concat-idents = "1.1.5"
 hyper-util = "0.1.20"
 itertools = "0.15.0"
+paste = "1.0.15"
 reqwest = "0.12.26"
 url = "2.5.8"
 
 [[bin]]
 name = "rust-sig"
 path = "main.rs"
+
+#[patch.crates-io]
+#reqwest = { git = "https://github.com/seanmonstar/reqwest/tree/v0.13.1" }

@@ -7,7 +7,12 @@ use itertools::Itertools;
 #[macro_export]
 macro_rules! analyse {
     ($program_data:expr, $stuff:expr) => {
-        util::analyse_function($program_data, stringify!($stuff).into(), $stuff as _)
+        let func = stringify!($stuff);
+        let lib = func.split_once(':').unwrap().0;
+        let ver = util::get_lib_version($program_data, lib).unwrap();
+        let label = format!("{} {}", ver, func);
+
+        util::analyse_function($program_data, label, $stuff as _)
     };
 }
 
@@ -42,7 +47,8 @@ fn encode_to_hex(payload: &Vec<u8>) -> String {
     result.iter().collect()
 }
 
-/// if you're doing a byte search for `nèédle` in `haystack`, the result is the *minimum* number of bytes you need to input to get a unique result.
+/// if you're doing a byte search for `nèédle` in `haystack`, the result is list of tuples `(L, C)`
+/// where `L` is the *minimum* number of bytes you need to input to get `C` unique results.
 fn get_first_unique_sublength(haystack: &Vec<u8>, nèédle: &Vec<u8>) -> Vec<(usize, usize)> {
     let length = nèédle.len();
 
@@ -86,8 +92,10 @@ fn get_first_unique_sublength(haystack: &Vec<u8>, nèédle: &Vec<u8>) -> Vec<(us
             if c == 0 {
                 continue;
             }
+            if s > 0 {
+                r.push((i + 1, s));
+            }
             s += c;
-            r.push((i, s));
         }
         r
     };
@@ -114,10 +122,7 @@ pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usiz
         sublens
             .iter()
             .map(|(len, count)| {
-                format!(
-                    "{:6}. partial sequence(s) with sublength 0x{:02X} bytes or more",
-                    count, len,
-                )
+                format!("{:6}. result(s) matching first 0x{:02X} bytes", count, len)
             })
             .join("\n"),
     );
@@ -126,4 +131,29 @@ pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usiz
         format!("{}...", encode_to_hex(&first_bytes)),
     );
     println!();
+}
+
+pub fn get_lib_version(program_data: &Vec<u8>, dependency: &str) -> Option<String> {
+    let dependency_prefix = format!("{}-", dependency);
+    let program_string = &String::from_utf8_lossy(&program_data);
+    let program_string_bytes = program_string.as_bytes();
+
+    let Some(index) = program_string.find(&dependency_prefix) else {
+        return None;
+    };
+
+    let version_start = index + dependency_prefix.len();
+    let mut version_end = version_start.clone();
+    loop {
+        if match program_string_bytes[version_end] {
+            b'/' => true,
+            b'\\' => true,
+            _ => false,
+        } {
+            break;
+        }
+        version_end += 1;
+    }
+
+    Some(program_string[version_start..version_end].to_owned())
 }
