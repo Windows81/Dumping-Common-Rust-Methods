@@ -16,6 +16,9 @@ jobs:
     strategy:
       fail-fast: false # Allows jobs to fail independently.
       matrix:
+        dependency-to-test:
+          - reqwest
+
         build-env:
           - os: windows-latest
             arch: i686-pc-windows-gnu
@@ -27,8 +30,6 @@ jobs:
             arch: i686-uwp-windows-gnu
           - os: windows-latest
             arch: i686-uwp-windows-msvc
-          - os: windows-latest
-            arch: i686-win7-windows-gnu
           - os: windows-latest
             arch: i686-win7-windows-msvc
           - os: windows-latest
@@ -43,8 +44,6 @@ jobs:
             arch: x86_64-uwp-windows-msvc
           - os: windows-latest
             arch: x86_64-win7-windows-gnu
-          - os: windows-latest
-            arch: x86_64-win7-windows-msvc
 
           - os: ubuntu-latest
             arch: i686-unknown-linux-gnu
@@ -59,9 +58,6 @@ jobs:
           - os: ubuntu-latest
             arch: x86_64-unknown-linux-gnux32
 
-        dependency-to-test:
-          - reqwest
-
 
     runs-on: ${{ matrix.build-env.os }}
 
@@ -72,36 +68,23 @@ jobs:
         path: |
           ~/.cargo/registry
           ~/.cargo/git
+          ~/.rustup
           target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
 
     - name: Check Out
       uses: actions/checkout@v4
 
-    - name: Collect Versions
-      shell: bash
-      run: |
-        curl https://crates.io/api/v1/crates/reqwest -H 'User-Agent: @Windows81 on GitHub' \
-        | jq -r '.versions|reverse[].num' \
-        | tee "${{ runner.temp }}/versions.txt"
-
-    - name: Prepare Cargo File
-      shell: bash
-      run: |
-        echo "[features]" >> Cargo.toml
-        echo "dep_reqwest = [\"${{ matrix.dependency-to-test }}\"]" >> Cargo.toml
-
     - name: Build
-      shell: bash
-      run: |
-        while read -r line; do
-          cargo add "${{ matrix.dependency-to-test }}@$line"
-          cargo rustc --target ${{ matrix.build-env.arch }} --features dep_${{ matrix.dependency-to-test }} --verbose --release -- -C opt-level=3 -C link-dead-code=y -C panic=abort
-          cargo run >results/${{ matrix.build-env.arch }}-${{ matrix.dependency-to-test }}-$line.txt
-        done <"${{ runner.temp }}/versions.txt"
+      run: python action.py "${{ matrix.build-env.arch }}" "${{ matrix.dependency-to-test }}"
 
     - name: Add and Commit
       uses: EndBug/add-and-commit@v9
       with:
         add: results
-        message: 'Update latest prices.'
+        message: 'Update latest signatures'
