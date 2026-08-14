@@ -6,13 +6,16 @@ fn main() {
         std::fs::read(path).unwrap()
     };
 
-    analyse!(&program_data, reqwest::get::<String>);
-    analyse!(&program_data, reqwest::get::<&'static String>);
-    analyse!(&program_data, reqwest::get::<&'static str>);
-    analyse!(&program_data, reqwest::get::<url::Url>);
+    #[cfg(feature = "dep_reqwest")]
+    {
+        analyse!(&program_data, reqwest::get::<String>);
+        analyse!(&program_data, reqwest::get::<&'static String>);
+        analyse!(&program_data, reqwest::get::<&'static str>);
+        analyse!(&program_data, reqwest::get::<url::Url>);
 
-    analyse!(&program_data, reqwest::Client::request::<String>);
-    analyse!(&program_data, reqwest::Client::request::<&'static String>);
-    analyse!(&program_data, reqwest::Client::request::<&'static str>);
-    analyse!(&program_data, reqwest::Client::request::<url::Url>);
+        analyse!(&program_data, reqwest::Client::request::<String>);
+        analyse!(&program_data, reqwest::Client::request::<&'static String>);
+        analyse!(&program_data, reqwest::Client::request::<&'static str>);
+        analyse!(&program_data, reqwest::Client::request::<url::Url>);
+    }
 }

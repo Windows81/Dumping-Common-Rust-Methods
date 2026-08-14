@@ -16,5 +16,5 @@ url = "2.5.8"
 name = "rust-sig"
 path = "main.rs"
 
-#[patch.crates-io]
-#reqwest = { git = "https://github.com/seanmonstar/reqwest/tree/v0.13.1" }
+[features]
+dep_reqwest = []
