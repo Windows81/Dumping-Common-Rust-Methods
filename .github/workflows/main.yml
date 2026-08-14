@@ -92,7 +92,7 @@ jobs:
           cargo add "${{ matrix.dependency-to-test }}@$line"
           cargo build --target ${{ matrix.build-env.arch }} --features dep_${{ matrix.dependency-to-test }} --verbose --release -- -C opt-level=3 -C link-dead-code=y -C panic=abort
           cargo run >results/${{ matrix.build-env.arch }}-${{ matrix.dependency-to-test }}-$line.txt
-        done <${{ runner.temp }}/versions.txt
+        done <"${{ runner.temp }}/versions.txt"
 
     - name: Add and Commit
       uses: EndBug/add-and-commit@v9
