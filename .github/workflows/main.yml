@@ -85,12 +85,18 @@ jobs:
         | jq -r '.versions|reverse[].num' \
         | tee "${{ runner.temp }}/versions.txt"
 
+    - name: Prepare Cargo File
+      shell: bash
+      run: |
+        echo "[features]" >> Cargo.toml
+        echo "dep_reqwest = [\"${{ matrix.dependency-to-test }}\"]" >> Cargo.toml
+
     - name: Build
       shell: bash
       run: |
         while read -r line; do
           cargo add "${{ matrix.dependency-to-test }}@$line"
-          cargo build --target ${{ matrix.build-env.arch }} --features dep_${{ matrix.dependency-to-test }} --verbose --release -- -C opt-level=3 -C link-dead-code=y -C panic=abort
+          cargo rustc --target ${{ matrix.build-env.arch }} --features dep_${{ matrix.dependency-to-test }} --verbose --release -- -C opt-level=3 -C link-dead-code=y -C panic=abort
           cargo run >results/${{ matrix.build-env.arch }}-${{ matrix.dependency-to-test }}-$line.txt
         done <"${{ runner.temp }}/versions.txt"
 
