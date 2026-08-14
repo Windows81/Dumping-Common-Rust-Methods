@@ -27,7 +27,7 @@ def main(arch, dep_name):
     subprocess.call(['rustup', 'target', 'add', arch])
 
     for version in versions:
-        path = f'results/{arch}-{dep_name}-{version}-$line.txt'
+        path = f'results/{arch}-{dep_name}-{version}.md'
         if os.path.exists(path):
             continue
 

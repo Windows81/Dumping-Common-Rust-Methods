@@ -2,15 +2,13 @@ const BASE_BYTE_COUNT: usize = 0x48;
 
 use std::collections::{HashMap, HashSet};
 
-use itertools::Itertools;
-
 #[macro_export]
 macro_rules! analyse {
     ($program_data:expr, $stuff:expr) => {
         let func = stringify!($stuff);
         let lib = func.split_once(':').unwrap().0;
         let ver = util::get_lib_version($program_data, lib).unwrap();
-        let label = format!("{} {}", ver, func);
+        let label = format!("`{}` `{}`", func, ver);
 
         util::analyse_function($program_data, label, $stuff as _)
     };
@@ -103,33 +101,17 @@ fn get_first_unique_sublength(haystack: &Vec<u8>, nèédle: &Vec<u8>) -> Vec<(us
     string_lengths_vec
 }
 
-fn print_style(style: ansi_term::Style, text: String) {
-    println!("{}", style.paint(text));
-}
-
 pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usize) {
     let first_bytes = read::<BASE_BYTE_COUNT>(func as _);
     let sublens = get_first_unique_sublength(&program_data, &first_bytes);
-    print_style(
-        ansi_term::Style {
-            is_underline: true,
-            ..Default::default()
-        },
-        format!("[{:p}] {}", func, label),
-    );
-    print_style(
-        ansi_term::Colour::Blue.into(),
-        sublens
-            .iter()
-            .map(|(len, count)| {
-                format!("{:6}. result(s) matching first 0x{:02X} bytes", count, len)
-            })
-            .join("\n"),
-    );
-    print_style(
-        ansi_term::Colour::Red.into(),
-        format!("{}...", encode_to_hex(&first_bytes)),
-    );
+    println!("## `[{:p}]` {}", func, label);
+    for (len, count) in sublens {
+        println!("{:6}. result(s) matching first 0x{:02X} bytes", count, len);
+    }
+    println!();
+    println!("```");
+    println!("{}...", encode_to_hex(&first_bytes));
+    println!("```");
     println!();
 }
 

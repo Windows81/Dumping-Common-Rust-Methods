@@ -27,23 +27,11 @@ jobs:
           - os: windows-latest
             arch: i686-pc-windows-msvc
           - os: windows-latest
-            arch: i686-uwp-windows-gnu
-          - os: windows-latest
-            arch: i686-uwp-windows-msvc
-          - os: windows-latest
-            arch: i686-win7-windows-msvc
-          - os: windows-latest
             arch: x86_64-pc-windows-gnu
           - os: windows-latest
             arch: x86_64-pc-windows-gnullvm
           - os: windows-latest
             arch: x86_64-pc-windows-msvc
-          - os: windows-latest
-            arch: x86_64-uwp-windows-gnu
-          - os: windows-latest
-            arch: x86_64-uwp-windows-msvc
-          - os: windows-latest
-            arch: x86_64-win7-windows-gnu
 
           - os: ubuntu-latest
             arch: i686-unknown-linux-gnu
@@ -90,4 +78,5 @@ jobs:
       uses: EndBug/add-and-commit@v9
       with:
         add: results
-        message: 'Update latest signatures'
+        pull: '--rebase --autostash'
+        push_attempts: 3
