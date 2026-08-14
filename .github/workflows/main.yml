@@ -79,12 +79,14 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Collect Versions
+      shell: bash
       run: |
         curl https://crates.io/api/v1/crates/reqwest -H 'User-Agent: @Windows81 on GitHub' \
         | jq -r '.versions|reverse[].num' \
         | tee "${{ runner.temp }}/versions.txt"
 
     - name: Build
+      shell: bash
       run: |
         while read -r line; do
           cargo add "${{ matrix.dependency-to-test }}@$line"
