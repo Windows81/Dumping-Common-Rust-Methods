@@ -1,10 +1,16 @@
 ## `[0x7ff667b91040]` `reqwest::get::<String>` `0.12.28`
-     1. result(s) matching first 0x07 bytes
-     2. result(s) matching first 0x06 bytes
-     9. result(s) matching first 0x05 bytes
-    51. result(s) matching first 0x04 bytes
-    87. result(s) matching first 0x03 bytes
-  6075. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x07 bytes
+
+_2_ result(s) match first 0x06 bytes
+
+_9_ result(s) match first 0x05 bytes
+
+_51_ result(s) match first 0x04 bytes
+
+_87_ result(s) match first 0x03 bytes
+
+_6075_ result(s) match first 0x02 bytes
 
 ```
 48 89 C8 48 8B 4A 10 48 89 48 10 0F 10 02 0F 11
@@ -15,12 +21,18 @@
 ```
 
 ## `[0x7ff667b91060]` `reqwest::get::<&'static String>` `0.12.28`
-     1. result(s) matching first 0x07 bytes
-     2. result(s) matching first 0x06 bytes
-     7. result(s) matching first 0x05 bytes
-    51. result(s) matching first 0x04 bytes
-    87. result(s) matching first 0x03 bytes
-  6075. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x07 bytes
+
+_2_ result(s) match first 0x06 bytes
+
+_7_ result(s) match first 0x05 bytes
+
+_51_ result(s) match first 0x04 bytes
+
+_87_ result(s) match first 0x03 bytes
+
+_6075_ result(s) match first 0x02 bytes
 
 ```
 48 89 C8 48 89 51 28 C6 41 31 00 C3 CC CC CC CC
@@ -31,12 +43,18 @@
 ```
 
 ## `[0x7ff667b91070]` `reqwest::get::<&'static str>` `0.12.28`
-     1. result(s) matching first 0x07 bytes
-     2. result(s) matching first 0x06 bytes
-     7. result(s) matching first 0x05 bytes
-    51. result(s) matching first 0x04 bytes
-    87. result(s) matching first 0x03 bytes
-  6075. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x07 bytes
+
+_2_ result(s) match first 0x06 bytes
+
+_7_ result(s) match first 0x05 bytes
+
+_51_ result(s) match first 0x04 bytes
+
+_87_ result(s) match first 0x03 bytes
+
+_6075_ result(s) match first 0x02 bytes
 
 ```
 48 89 C8 48 89 51 20 4C 89 41 28 C6 41 39 00 C3
@@ -47,12 +65,18 @@
 ```
 
 ## `[0x7ff667b91000]` `reqwest::get::<url::Url>` `0.12.28`
-     1. result(s) matching first 0x07 bytes
-     2. result(s) matching first 0x06 bytes
-     9. result(s) matching first 0x05 bytes
-    51. result(s) matching first 0x04 bytes
-    87. result(s) matching first 0x03 bytes
-  6075. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x07 bytes
+
+_2_ result(s) match first 0x06 bytes
+
+_9_ result(s) match first 0x05 bytes
+
+_51_ result(s) match first 0x04 bytes
+
+_87_ result(s) match first 0x03 bytes
+
+_6075_ result(s) match first 0x02 bytes
 
 ```
 48 89 C8 48 8B 4A 50 48 89 48 50 0F 10 42 40 0F
@@ -63,14 +87,22 @@
 ```
 
 ## `[0x7ff667b91250]` `reqwest::Client::request::<String>` `0.12.28`
-     1. result(s) matching first 0x3E bytes
-     2. result(s) matching first 0x3D bytes
-     3. result(s) matching first 0x2B bytes
-     4. result(s) matching first 0x07 bytes
-     6. result(s) matching first 0x05 bytes
-    79. result(s) matching first 0x04 bytes
-   184. result(s) matching first 0x03 bytes
-   359. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x3E bytes
+
+_2_ result(s) match first 0x3D bytes
+
+_3_ result(s) match first 0x2B bytes
+
+_4_ result(s) match first 0x07 bytes
+
+_6_ result(s) match first 0x05 bytes
+
+_79_ result(s) match first 0x04 bytes
+
+_184_ result(s) match first 0x03 bytes
+
+_359_ result(s) match first 0x02 bytes
 
 ```
 55 56 57 48 81 EC A0 01 00 00 48 8D AC 24 80 00
@@ -81,14 +113,22 @@
 ```
 
 ## `[0x7ff667b91420]` `reqwest::Client::request::<&'static String>` `0.12.28`
-     1. result(s) matching first 0x3E bytes
-     2. result(s) matching first 0x3D bytes
-     3. result(s) matching first 0x2B bytes
-     4. result(s) matching first 0x07 bytes
-     6. result(s) matching first 0x05 bytes
-    79. result(s) matching first 0x04 bytes
-   184. result(s) matching first 0x03 bytes
-   359. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x3E bytes
+
+_2_ result(s) match first 0x3D bytes
+
+_3_ result(s) match first 0x2B bytes
+
+_4_ result(s) match first 0x07 bytes
+
+_6_ result(s) match first 0x05 bytes
+
+_79_ result(s) match first 0x04 bytes
+
+_184_ result(s) match first 0x03 bytes
+
+_359_ result(s) match first 0x02 bytes
 
 ```
 55 56 57 48 81 EC A0 01 00 00 48 8D AC 24 80 00
@@ -99,12 +139,18 @@
 ```
 
 ## `[0x7ff667b915f0]` `reqwest::Client::request::<&'static str>` `0.12.28`
-     1. result(s) matching first 0x2B bytes
-     4. result(s) matching first 0x07 bytes
-     6. result(s) matching first 0x05 bytes
-    79. result(s) matching first 0x04 bytes
-   184. result(s) matching first 0x03 bytes
-   359. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x2B bytes
+
+_4_ result(s) match first 0x07 bytes
+
+_6_ result(s) match first 0x05 bytes
+
+_79_ result(s) match first 0x04 bytes
+
+_184_ result(s) match first 0x03 bytes
+
+_359_ result(s) match first 0x02 bytes
 
 ```
 55 56 57 48 81 EC A0 01 00 00 48 8D AC 24 80 00
@@ -115,13 +161,20 @@
 ```
 
 ## `[0x7ff667b91080]` `reqwest::Client::request::<url::Url>` `0.12.28`
-     1. result(s) matching first 0x3D bytes
-     3. result(s) matching first 0x2B bytes
-     4. result(s) matching first 0x07 bytes
-     6. result(s) matching first 0x05 bytes
-    79. result(s) matching first 0x04 bytes
-   184. result(s) matching first 0x03 bytes
-   359. result(s) matching first 0x02 bytes
+
+_1_ result(s) match first 0x3D bytes
+
+_3_ result(s) match first 0x2B bytes
+
+_4_ result(s) match first 0x07 bytes
+
+_6_ result(s) match first 0x05 bytes
+
+_79_ result(s) match first 0x04 bytes
+
+_184_ result(s) match first 0x03 bytes
+
+_359_ result(s) match first 0x02 bytes
 
 ```
 55 56 57 48 81 EC A0 01 00 00 48 8D AC 24 80 00
@@ -130,4 +183,3 @@
 01 48 8D 8D B0 00 00 00 4C 89 CA E8 A0 64 00 00
 90 4C 8B 8D 08 01 00 00...
 ```
-

@@ -34,10 +34,13 @@ def main(arch, dep_name):
         subprocess.call(
             ['cargo', 'add', f'{dep_name}@{version}'],
         )
-        subprocess.call([
+
+        if (subprocess.call([
             'cargo', 'rustc', '--release', '--target', arch,
             '--', '-C', 'opt-level=3', '-C', 'link-dead-code=y', '-C', 'panic=abort',
-        ])
+        ]) > 0):
+            continue
+
         subprocess.call(['cargo', 'run', '--release'], stdout=open(path, 'w'))
 
 

@@ -106,7 +106,8 @@ pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usiz
     let sublens = get_first_unique_sublength(&program_data, &first_bytes);
     println!("## `[{:p}]` {}", func, label);
     for (len, count) in sublens {
-        println!("{:6}. result(s) matching first 0x{:02X} bytes", count, len);
+        println!();
+        println!("*{}* result(s) match first 0x{:02X} bytes", count, len);
     }
     println!();
     println!("```");
