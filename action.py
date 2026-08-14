@@ -24,6 +24,8 @@ def main(arch, dep_name):
         o.write(f"default = [\"dep_{dep_name}\"]\n")
         o.write(f"dep_{dep_name} = []\n")
 
+    subprocess.call(['rustup', 'target', 'add', arch])
+
     for version in versions:
         path = f'results/{arch}-{dep_name}-{version}-$line.txt'
         if os.path.exists(path):

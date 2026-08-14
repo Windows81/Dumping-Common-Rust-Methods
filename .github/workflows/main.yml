@@ -72,13 +72,16 @@ jobs:
           target
         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-    - name: Set up Python
+    - name: Set Up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.13'
 
     - name: Check Out
       uses: actions/checkout@v4
+
+    - name: Set Up Rustup
+      run: rustup target add "${{ matrix.build-env.arch }}"
 
     - name: Build
       run: python action.py "${{ matrix.build-env.arch }}" "${{ matrix.dependency-to-test }}"
