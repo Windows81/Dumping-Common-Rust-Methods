@@ -18,6 +18,8 @@ jobs:
       matrix:
         dependency-to-test:
           - reqwest
+          - hyper
+          - http
 
         build-env:
           - os: windows-latest
@@ -28,8 +30,6 @@ jobs:
             arch: i686-pc-windows-msvc
           - os: windows-latest
             arch: x86_64-pc-windows-gnu
-          - os: windows-latest
-            arch: x86_64-pc-windows-gnullvm
           - os: windows-latest
             arch: x86_64-pc-windows-msvc
 

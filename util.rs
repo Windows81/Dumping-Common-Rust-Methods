@@ -4,11 +4,11 @@ use std::collections::{HashMap, HashSet};
 
 #[macro_export]
 macro_rules! analyse {
-    ($program_data:expr, $stuff:expr) => {
+    ($program_data:expr, $lib_name:literal, $stuff:expr) => {
         let func = stringify!($stuff);
-        let lib = func.split_once(':').unwrap().0;
-        let ver = util::get_lib_version($program_data, lib).unwrap();
-        let label = format!("`{}` `{}`", func, ver);
+        let lib = stringify!($lib_name);
+        let ver = util::get_lib_version($program_data, lib).unwrap_or("?.?.?".into());
+        let label = format!("`{}` `{}-{}`", func, lib, ver);
 
         util::analyse_function($program_data, label, $stuff as _)
     };
@@ -34,13 +34,10 @@ fn encode_to_hex(payload: &Vec<u8>) -> String {
     }
 
     // Adds newlines every `NEWLINE_FREQ * 3` bytes.
-    for i in (std::ops::Range {
-        start: NEWLINE_FREQ * 3 - 1,
-        end: result.len(),
-    })
-    .step_by(NEWLINE_FREQ * 3)
-    {
+    let mut i = NEWLINE_FREQ * 3 - 1;
+    while i < result.len() {
         result[i] = '\n';
+        i += NEWLINE_FREQ * 3;
     }
     result.iter().collect()
 }
@@ -107,7 +104,7 @@ pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usiz
     println!("## `[{:p}]` {}", func, label);
     for (len, count) in sublens {
         println!();
-        println!("*{}* result(s) match first 0x{:02X} bytes", count, len);
+        println!("First **0x{:02X}** bytes: *{} results*", len, count);
     }
     println!();
     println!("```");

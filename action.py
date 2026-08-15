@@ -21,8 +21,8 @@ def main(arch, dep_name):
 
     with open('Cargo.toml', 'a') as o:
         o.write("[features]\n")
-        o.write(f"default = [\"dep_{dep_name}\"]\n")
-        o.write(f"dep_{dep_name} = []\n")
+        o.write(f"default = [\"feat-{dep_name}\"]\n")
+        o.write(f"feat-{dep_name} = []\n")
 
     subprocess.call(['rustup', 'target', 'add', arch])
 
@@ -31,14 +31,19 @@ def main(arch, dep_name):
         if os.path.exists(path):
             continue
 
-        subprocess.call(
-            ['cargo', 'add', f'{dep_name}@{version}'],
+        add_ret = subprocess.call(
+            ['cargo', 'add', f'{dep_name}@={version}'],
         )
 
-        if (subprocess.call([
-            'cargo', 'rustc', '--release', '--target', arch,
+        if (add_ret > 0):
+            continue
+
+        compile_ret = subprocess.call([
+            'cargo', 'rustc', '--release', '--target', arch, '--features', f'feat-{dep_name}', '--no-default-features',
             '--', '-C', 'opt-level=3', '-C', 'link-dead-code=y', '-C', 'panic=abort',
-        ]) > 0):
+        ])
+
+        if (compile_ret > 0):
             continue
 
         subprocess.call(['cargo', 'run', '--release'], stdout=open(path, 'w'))
