@@ -9,7 +9,7 @@ import urllib.request
 def main(arch, dep_name):
 
     with urllib.request.urlopen(urllib.request.Request(
-        url='https://crates.io/api/v1/crates/reqwest',
+        url=f'https://crates.io/api/v1/crates/{dep_name}',
         headers={'User-Agent': '@Windows81 on GitHub'},
     )) as response:
         data = json.loads(response.read())
@@ -18,11 +18,6 @@ def main(arch, dep_name):
         v['num']
         for v in data['versions']
     ]
-
-    with open('Cargo.toml', 'a') as o:
-        o.write("[features]\n")
-        o.write(f"default = [\"feat-{dep_name}\"]\n")
-        o.write(f"feat-{dep_name} = []\n")
 
     subprocess.call(['rustup', 'target', 'add', arch])
 

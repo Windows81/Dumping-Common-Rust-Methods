@@ -6,7 +6,7 @@ use std::collections::{HashMap, HashSet};
 macro_rules! analyse {
     ($program_data:expr, $lib_name:literal, $stuff:expr) => {
         let func = stringify!($stuff);
-        let lib = stringify!($lib_name);
+        let lib = $lib_name;
         let ver = util::get_lib_version($program_data, lib).unwrap_or("?.?.?".into());
         let label = format!("`{}` `{}-{}`", func, lib, ver);
 
