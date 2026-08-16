@@ -38,10 +38,13 @@ def main(arch, dep_name):
             '--', '-C', 'opt-level=3', '-C', 'link-dead-code=y', '-C', 'panic=abort',
         ])
 
-        if (compile_ret > 0):
+        if compile_ret > 0:
             continue
 
         subprocess.call(['cargo', 'run', '--release'], stdout=open(path, 'w'))
+
+        if os.stat(path).st_size == 0:
+            os.remove(path)
 
 
 if __name__ == '__main__':
