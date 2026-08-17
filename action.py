@@ -16,7 +16,7 @@ def main(arch, dep_name):
 
     versions = [
         v['num']
-        for v in data['versions']
+        for v in reversed(data['versions'])
     ]
 
     subprocess.call(['rustup', 'target', 'add', arch])
