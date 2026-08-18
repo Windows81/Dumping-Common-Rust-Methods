@@ -46,6 +46,8 @@ def main(arch, dep_name):
         if os.stat(path).st_size == 0:
             os.remove(path)
 
+        print(f'--- Program output dumped to {path} ---')
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

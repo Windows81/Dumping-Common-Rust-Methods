@@ -74,7 +74,7 @@ jobs:
       run: python action.py "${{ matrix.build-env.arch }}" "${{ matrix.dependency-to-test }}"
 
     - name: Add and Commit
-      uses: EndBug/add-and-commit@v11
+      uses: EndBug/add-and-commit@v10
       with:
         add: results
         pull: '--rebase --autostash'

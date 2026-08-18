@@ -24,4 +24,4 @@ feat-hyper = ["dep:hyper"]
 feat-http = ["dep:http"]
 # feat-hyper-rustls = ["dep:hyper-rustls"]
 
-default = []
+default = ["feat-http"]
