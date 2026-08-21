@@ -1,0 +1,198 @@
+## `[0x55fa2af50440]` `get::<String>` `reqwest-0.11.7`
+
+First **0x07** bytes: *1 results*
+
+First **0x06** bytes: *2 results*
+
+First **0x05** bytes: *11 results*
+
+First **0x04** bytes: *52 results*
+
+First **0x03** bytes: *101 results*
+
+First **0x02** bytes: *9199 results*
+
+```
+48 89 F8 48 8B 4E 10 48 89 4F 10 0F 10 06 0F 11
+07 C6 87 60 01 00 00 00 C3 CC CC CC CC CC CC CC
+48 89 F8 48 89 B7 48 01 00 00 C6 87 51 01 00 00
+00 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC
+48 89 F8 48 89 B7 40 01...
+```
+## `[0x55fa2af50460]` `get::<&'static String>` `reqwest-0.11.7`
+
+First **0x07** bytes: *1 results*
+
+First **0x06** bytes: *2 results*
+
+First **0x05** bytes: *10 results*
+
+First **0x04** bytes: *52 results*
+
+First **0x03** bytes: *101 results*
+
+First **0x02** bytes: *9199 results*
+
+```
+48 89 F8 48 89 B7 48 01 00 00 C6 87 51 01 00 00
+00 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC CC
+48 89 F8 48 89 B7 40 01 00 00 48 89 97 48 01 00
+00 C6 87 59 01 00 00 00 C3 CC CC CC CC CC CC CC
+55 41 57 41 56 41 55 41...
+```
+## `[0x55fa2af50480]` `get::<&'static str>` `reqwest-0.11.7`
+
+First **0x07** bytes: *1 results*
+
+First **0x06** bytes: *2 results*
+
+First **0x05** bytes: *10 results*
+
+First **0x04** bytes: *52 results*
+
+First **0x03** bytes: *101 results*
+
+First **0x02** bytes: *9199 results*
+
+```
+48 89 F8 48 89 B7 40 01 00 00 48 89 97 48 01 00
+00 C6 87 59 01 00 00 00 C3 CC CC CC CC CC CC CC
+55 41 57 41 56 41 55 41 54 53 48 81 EC 58 02 00
+00 49 89 D5 49 89 F4 48 89 FB 48 8D 7C 24 10 48
+89 CE FF 15 C0 DE 07 00...
+```
+## `[0x55fa2af50400]` `get::<url::Url>` `reqwest-0.11.7`
+
+First **0x07** bytes: *1 results*
+
+First **0x06** bytes: *2 results*
+
+First **0x05** bytes: *11 results*
+
+First **0x04** bytes: *52 results*
+
+First **0x03** bytes: *101 results*
+
+First **0x02** bytes: *9199 results*
+
+```
+48 89 F8 48 8B 4E 50 48 89 4F 50 0F 10 46 40 0F
+11 47 40 0F 10 06 0F 10 4E 10 0F 10 56 20 0F 10
+5E 30 0F 11 5F 30 0F 11 57 20 0F 11 4F 10 0F 11
+07 C6 87 A0 01 00 00 00 C3 CC CC CC CC CC CC CC
+48 89 F8 48 8B 4E 10 48...
+```
+## `[0x55fa2af50750]` `Client::request::<String>` `reqwest-0.11.7`
+
+First **0x25** bytes: *1 results*
+
+First **0x23** bytes: *3 results*
+
+First **0x0F** bytes: *4 results*
+
+First **0x0E** bytes: *5 results*
+
+First **0x0C** bytes: *34 results*
+
+First **0x0B** bytes: *108 results*
+
+First **0x07** bytes: *152 results*
+
+First **0x06** bytes: *157 results*
+
+First **0x03** bytes: *174 results*
+
+First **0x02** bytes: *529 results*
+
+```
+55 41 57 41 56 41 55 41 54 53 48 81 EC 58 02 00
+00 49 89 D5 49 89 F4 48 89 FB 48 8D 7C 24 10 48
+89 CE FF 15 28 DC 07 00 45 0F B6 7D 00 49 8B 7D
+08 4D 8B 75 10 48 8B 6C 24 10 48 83 FD FF 0F 84
+9F 01 00 00 4C 89 64 24...
+```
+## `[0x55fa2af50a00]` `Client::request::<&'static String>` `reqwest-0.11.7`
+
+First **0x25** bytes: *1 results*
+
+First **0x23** bytes: *3 results*
+
+First **0x0F** bytes: *4 results*
+
+First **0x0E** bytes: *5 results*
+
+First **0x0C** bytes: *34 results*
+
+First **0x0B** bytes: *108 results*
+
+First **0x07** bytes: *152 results*
+
+First **0x06** bytes: *157 results*
+
+First **0x03** bytes: *174 results*
+
+First **0x02** bytes: *529 results*
+
+```
+55 41 57 41 56 41 55 41 54 53 48 81 EC 58 02 00
+00 49 89 D5 49 89 F4 48 89 FB 48 8D 7C 24 10 48
+89 CE FF 15 80 D9 07 00 45 0F B6 7D 00 49 8B 7D
+08 4D 8B 75 10 48 8B 6C 24 10 48 83 FD FF 0F 84
+9F 01 00 00 4C 89 64 24...
+```
+## `[0x55fa2af50cb0]` `Client::request::<&'static str>` `reqwest-0.11.7`
+
+First **0x23** bytes: *1 results*
+
+First **0x0F** bytes: *4 results*
+
+First **0x0E** bytes: *5 results*
+
+First **0x0C** bytes: *34 results*
+
+First **0x0B** bytes: *108 results*
+
+First **0x07** bytes: *152 results*
+
+First **0x06** bytes: *157 results*
+
+First **0x03** bytes: *174 results*
+
+First **0x02** bytes: *529 results*
+
+```
+55 41 57 41 56 41 55 41 54 53 48 81 EC 58 02 00
+00 49 89 D5 49 89 F4 48 89 FB 48 8D 7C 24 10 48
+89 CE 4C 89 C2 FF 15 D5 D6 07 00 45 0F B6 7D 00
+49 8B 7D 08 4D 8B 75 10 48 8B 6C 24 10 48 83 FD
+FF 0F 84 9F 01 00 00 4C...
+```
+## `[0x55fa2af504a0]` `Client::request::<url::Url>` `reqwest-0.11.7`
+
+First **0x25** bytes: *1 results*
+
+First **0x23** bytes: *3 results*
+
+First **0x0F** bytes: *4 results*
+
+First **0x0E** bytes: *5 results*
+
+First **0x0C** bytes: *34 results*
+
+First **0x0B** bytes: *108 results*
+
+First **0x07** bytes: *152 results*
+
+First **0x06** bytes: *157 results*
+
+First **0x03** bytes: *174 results*
+
+First **0x02** bytes: *529 results*
+
+```
+55 41 57 41 56 41 55 41 54 53 48 81 EC 58 02 00
+00 49 89 D5 49 89 F4 48 89 FB 48 8D 7C 24 10 48
+89 CE FF 15 C0 DE 07 00 45 0F B6 7D 00 49 8B 7D
+08 4D 8B 75 10 48 8B 6C 24 10 48 83 FD FF 0F 84
+9F 01 00 00 4C 89 64 24...
+```
