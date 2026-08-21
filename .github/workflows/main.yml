@@ -17,9 +17,15 @@ jobs:
       fail-fast: false # Allows jobs to fail independently.
       matrix:
         dependency-to-test:
-          - reqwest
-          - hyper
-          - http
+          - name: reqwest
+            min-version: 0.11.0
+            max-version: 9007199254740991.9007199254740991.9007199254740991
+          - name: hyper
+            min-version: 0.3.15
+            max-version: 9007199254740991.9007199254740991.9007199254740991
+          - name: http
+            min-version: 0.1.19
+            max-version: 9007199254740991.9007199254740991.9007199254740991
 
         build-env:
           - os: windows-latest
@@ -71,7 +77,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build
-      run: python action.py "${{ matrix.build-env.arch }}" "${{ matrix.dependency-to-test }}"
+      run: python action.py \
+        "${{ matrix.build-env.arch }}" "${{ matrix.dependency-to-test.name }}" \
+        "${{ matrix.dependency-to-test.min-version }}" "${{ matrix.dependency-to-test.max-version }}"
 
     - name: Add and Commit
       uses: EndBug/add-and-commit@v10

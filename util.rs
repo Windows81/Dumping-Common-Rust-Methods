@@ -1,16 +1,20 @@
 const BASE_BYTE_COUNT: usize = 0x48;
 
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::{HashMap, HashSet},
+    fmt::Write,
+};
 
 #[macro_export]
 macro_rules! analyse {
-    ($program_data:expr, $lib_name:literal, $stuff:expr) => {
+    ($program_data:expr, $writer:expr, $lib_name:literal, $stuff:expr) => {
         let func = stringify!($stuff);
         let lib = $lib_name;
         let ver = util::get_lib_version($program_data, lib).unwrap_or("?.?.?".into());
         let label = format!("`{}` `{}-{}`", func, lib, ver);
+        let result = util::analyse_function($program_data, label, $stuff as _);
 
-        util::analyse_function($program_data, label, $stuff as _)
+        let _ = $writer.write(result.as_bytes());
     };
 }
 
@@ -98,19 +102,18 @@ fn get_first_unique_sublength(haystack: &Vec<u8>, nèédle: &Vec<u8>) -> Vec<(us
     string_lengths_vec
 }
 
-pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usize) {
+pub fn analyse_function(program_data: &Vec<u8>, label: String, func: *const usize) -> String {
     let first_bytes = read::<BASE_BYTE_COUNT>(func as _);
     let sublens = get_first_unique_sublength(&program_data, &first_bytes);
-    println!("## `[{:p}]` {}", func, label);
+
+    let mut res = String::new();
+    let _ = write!(res, "## `[{:p}]` {}\n", func, label);
     for (len, count) in sublens {
-        println!();
-        println!("First **0x{:02X}** bytes: *{} results*", len, count);
+        let _ = write!(res, "\nFirst **0x{:02X}** bytes: *{} results*\n", len, count);
     }
-    println!();
-    println!("```");
-    println!("{}...", encode_to_hex(&first_bytes));
-    println!("```");
-    println!();
+    let _ = write!(res, "\n```\n{}...\n```\n", encode_to_hex(&first_bytes));
+
+    res
 }
 
 pub fn get_lib_version(program_data: &Vec<u8>, dependency: &str) -> Option<String> {

@@ -1,22 +1,32 @@
+use std::{fs::File, io::Write};
+
 mod util;
 
 fn main() {
-    let program_data = {
-        let path = std::env::args().next().unwrap();
-        std::fs::read(path).unwrap()
+    let mut args_iter = std::env::args();
+
+    // Program data
+    let prog = {
+        let prog_path = args_iter.next().unwrap();
+        std::fs::read(prog_path).unwrap()
+    };
+
+    let writer = {
+        let out_path = args_iter.next().unwrap();
+        File::create(out_path).unwrap()
     };
 
     #[cfg(feature = "feat-reqwest")]
     {
         use reqwest::{Client, get};
-        analyse!(&program_data, "reqwest", get::<String>);
-        analyse!(&program_data, "reqwest", get::<&'static String>);
-        analyse!(&program_data, "reqwest", get::<&'static str>);
-        analyse!(&program_data, "reqwest", get::<url::Url>);
-        analyse!(&program_data, "reqwest", Client::request::<String>);
-        analyse!(&program_data, "reqwest", Client::request::<&'static String>);
-        analyse!(&program_data, "reqwest", Client::request::<&'static str>);
-        analyse!(&program_data, "reqwest", Client::request::<url::Url>);
+        analyse!(&prog, &writer, "reqwest", get::<String>);
+        analyse!(&prog, &writer, "reqwest", get::<&'static String>);
+        analyse!(&prog, &writer, "reqwest", get::<&'static str>);
+        analyse!(&prog, &writer, "reqwest", get::<url::Url>);
+        analyse!(&prog, &writer, "reqwest", Client::request::<String>);
+        analyse!(&prog, &writer, "reqwest", Client::request::<&'static String>);
+        analyse!(&prog, &writer, "reqwest", Client::request::<&'static str>);
+        analyse!(&prog, &writer, "reqwest", Client::request::<url::Url>);
     }
 
     #[cfg(feature = "feat-hyper")]
@@ -39,20 +49,20 @@ fn main() {
         // Refer to https://hyper.rs/guides/1/client/basic/#setup for usage.
         // 2026-08-15
         {
-            analyse!(&program_data, "hyper", <hyper::Uri as std::str::FromStr>::from_str);
+            analyse!(&prog, &writer, "hyper", <hyper::Uri as std::str::FromStr>::from_str);
         }
 
         // Corresponds to `Full::new` in `Full::new(Bytes::from("Hello, World!")))`
         // Refer to https://hyper.rs/guides/1/server/hello-world/#creating-a-service for usage.
         // 2026-08-15
         {
-            analyse!(&program_data, "hyper", hyper::Response::<Full<Bytes>>::new);
-            analyse!(&program_data, "hyper", <Full<Bytes> as From<&'static str>>::from);
-            analyse!(&program_data, "hyper", <Full<Bytes> as From<&'static str>>::from);
-            analyse!(&program_data, "hyper", <Full<Bytes> as From<&[u8]>>::from);
-            analyse!(&program_data, "hyper", <Full<Bytes> as From<&str>>::from);
-            analyse!(&program_data, "hyper", <Full<Bytes> as From<String>>::from);
-            analyse!(&program_data, "hyper", <Full<Bytes> as From<Vec<u8>>>::from);
+            analyse!(&prog, &writer, "hyper", hyper::Response::<Full<Bytes>>::new);
+            analyse!(&prog, &writer, "hyper", <Full<Bytes> as From<&'static str>>::from);
+            analyse!(&prog, &writer, "hyper", <Full<Bytes> as From<&'static str>>::from);
+            analyse!(&prog, &writer, "hyper", <Full<Bytes> as From<&[u8]>>::from);
+            analyse!(&prog, &writer, "hyper", <Full<Bytes> as From<&str>>::from);
+            analyse!(&prog, &writer, "hyper", <Full<Bytes> as From<String>>::from);
+            analyse!(&prog, &writer, "hyper", <Full<Bytes> as From<Vec<u8>>>::from);
         }
 
         // Corresponds to `boxed()` in `Empty::<Bytes>::new().map_err(|never| match never {}).boxed()`
@@ -62,7 +72,7 @@ fn main() {
         // Refer to https://hyper.rs/guides/1/server/echo/#routing for usage.
         // 2026-08-15
         {
-            analyse!(&program_data, "hyper", Empty::<Bytes>::boxed);
+            analyse!(&prog, &writer, "hyper", Empty::<Bytes>::boxed);
         }
 
         // Chokepoint methods which *might* carry HTTP request bodies.
@@ -70,9 +80,9 @@ fn main() {
         //    - "hyper-1.11.0/src/proto/h1/dispatch.rs".
         //    - "hyper-1.11.0/src/body/incoming.rs".
         {
-            analyse!(&program_data, "hyper", Frame::<<Full<Bytes> as Body>::Data>::into_data); // poll_write
-            analyse!(&program_data, "hyper", Frame::<Bytes>::into_data); // poll_read
-            analyse!(&program_data, "hyper", futures_channel::mpsc::Sender::<Result<Bytes, Error>>::try_send); // send_data
+            analyse!(&prog, &writer, "hyper", Frame::<<Full<Bytes> as Body>::Data>::into_data); // poll_write
+            analyse!(&prog, &writer, "hyper", Frame::<Bytes>::into_data); // poll_read
+            analyse!(&prog, &writer, "hyper", futures_channel::mpsc::Sender::<Result<Bytes, Error>>::try_send); // send_data
         }
     }
 
@@ -89,11 +99,11 @@ fn main() {
           .unwrap();
         */
         {
-            analyse!(&program_data, "http", Builder::uri::<String>);
-            analyse!(&program_data, "http", Builder::uri::<&str>);
-            analyse!(&program_data, "http", Builder::body::<String>);
-            analyse!(&program_data, "http", Builder::body::<&str>);
-            analyse!(&program_data, "http", Builder::header::<HeaderName, HeaderValue>);
+            analyse!(&prog, &writer, "http", Builder::uri::<String>);
+            analyse!(&prog, &writer, "http", Builder::uri::<&str>);
+            analyse!(&prog, &writer, "http", Builder::body::<String>);
+            analyse!(&prog, &writer, "http", Builder::body::<&str>);
+            analyse!(&prog, &writer, "http", Builder::header::<HeaderName, HeaderValue>);
         }
     }
 }

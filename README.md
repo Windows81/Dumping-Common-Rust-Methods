@@ -16,6 +16,13 @@ The program at [`./main.rs`](./main.rs) iterates through a bunch of functions:
 
 To attempt completeness of scope, I use GitHub Actions (link to [workflow file](./.github/workflows/main.yml)) to compile those methods on various [target triples](https://doc.rust-lang.org/cargo/commands/cargo-rustc.html#option-cargo-rustc---target) for Windows and GNU/Linux; both are modern x86-based systems.
 
+To reproduce a runner action on your target, execute:
+
+```sh
+#                {target}              {dep}   {min}  {max}
+python action.py x86_64-pc-windows-gnu reqwest 0.12.0 9007199254740991.9007199254740991.9007199254740991
+```
+
 **A full list of dumped functions can be derived from reading [`./main.rs`](./main.rs).**
 
 ## Calling Convention?
